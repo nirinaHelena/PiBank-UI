@@ -14,27 +14,27 @@ const LandingPage= () => {
         />
       <div className="max-w-7xl mx-auto relative">
         <header className="flex flex-col items-center">
-          <h1 className="text-3xl font-bold text-gray-800">PiBank</h1>
-          <p className="mt-4 text-gray-600">
+          <h1 className="text-3xl font-bold text-gray-100">PiBank</h1>
+          <p className="mt-4 text-gray-200">
             The Bank of the Future - Easy, Secure, Fast
           </p>
         </header>
 
         <main className="mt-8 flex flex-col">
           <div className="flex flex-col items-center">
-            <h2 className="text-2xl font-bold text-gray-800">
+            <h2 className="text-2xl font-bold text-gray-100">
               Experience Banking in a New Way
             </h2>
-            <p className="mt-4 text-gray-600">
+            <p className="mt-4 text-gray-200">
               PiBank offers comprehensive financial services, meeting all your needs.
             </p>
           </div>
 
           <div className="mt-8 flex flex-row justify-between">
-            <button className="py-2 px-4 bg-blue-500 text-white rounded-md">
-              Sign Up
+            <button className="py-2 px-4 bg-red-700 text-white rounded-md">
+              Connect
             </button>
-            <a href="#" className="py-2 px-4 bg-gray-300 text-gray-600 rounded-md">
+            <a href="#" className="py-2 px-4 bg-gray-400 text-gray-200 rounded-md">
               Learn More
             </a>
           </div>
@@ -42,17 +42,17 @@ const LandingPage= () => {
 
         <footer className="mt-8">
           <div className="flex flex-row justify-between">
-            <p className="text-gray-600">
+            <p className="text-gray-200">
               Copyright © {new Date().getFullYear()} PiBank
             </p>
             <div className="flex flex-row">
-              <a href="#" className="mr-4 text-gray-600">
+              <a href="#" className="mr-4 text-gray-100">
                 About Us
               </a>
-              <a href="#" className="text-gray-600">
+              <a href="#" className=" mr-4 text-gray-100">
                 Programs
               </a>
-              <a href="#" className="text-gray-600">
+              <a href="#" className="mr-2 text-gray-100">
                 Contact Us
               </a>
             </div>
