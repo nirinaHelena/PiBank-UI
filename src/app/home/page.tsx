@@ -1,12 +1,18 @@
-"use client"
-
 import React from 'react';
+import Image from "next/image";
+import backgroundImage from "../../../public/images/cyber-monday-sale-credit-cards-keyboard.jpg";
 
 const LandingPage= () => {
 
   return (
-    <div className="h-screen flex flex-col items-center justify-center bg-gray-100 bg-gradient-to-r from-sky-500 to-indigo-500 hover:bg-gradient-to-r">
-      <div className="max-w-7xl mx-auto">
+    <div className="h-screen flex flex-col items-center justify-center" >
+    <Image
+        src={backgroundImage}
+        alt='Background Image'
+        layout='fill'
+        objectFit='cover'
+        />
+      <div className="max-w-7xl mx-auto relative">
         <header className="flex flex-col items-center">
           <h1 className="text-3xl font-bold text-gray-800">PiBank</h1>
           <p className="mt-4 text-gray-600">
