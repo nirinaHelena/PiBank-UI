@@ -1,17 +1,11 @@
 "use client"
 
 import React from 'react';
-import { useRouter } from 'next/router';
 
-const LandingPage: React.FC = () => {
-  const router = useRouter();
-
-  const handleSignUp = () => {
-    router.push('/signup');
-  };
+const LandingPage= () => {
 
   return (
-    <div className="h-screen flex flex-col items-center justify-center bg-gray-100">
+    <div className="h-screen flex flex-col items-center justify-center bg-gray-100 bg-gradient-to-r from-sky-500 to-indigo-500 hover:bg-gradient-to-r">
       <div className="max-w-7xl mx-auto">
         <header className="flex flex-col items-center">
           <h1 className="text-3xl font-bold text-gray-800">PiBank</h1>
@@ -31,7 +25,7 @@ const LandingPage: React.FC = () => {
           </div>
 
           <div className="mt-8 flex flex-row justify-between">
-            <button className="py-2 px-4 bg-blue-500 text-white rounded-md" onClick={handleSignUp}>
+            <button className="py-2 px-4 bg-blue-500 text-white rounded-md">
               Sign Up
             </button>
             <a href="#" className="py-2 px-4 bg-gray-300 text-gray-600 rounded-md">
