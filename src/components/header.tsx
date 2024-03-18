@@ -53,17 +53,17 @@ export default function App() {
         </NavbarBrand>
         <NavbarItem>
           <Link color="foreground" href="#">
-            Features
+            Dashboard
           </Link>
         </NavbarItem>
         <NavbarItem isActive>
           <Link href="#" aria-current="page" color="warning">
-            Customers
+            Balance
           </Link>
         </NavbarItem>
         <NavbarItem>
           <Link color="foreground" href="#">
-            Integrations
+            Transactions
           </Link>
         </NavbarItem>
       </NavbarContent>
