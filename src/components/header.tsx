@@ -1,46 +1,104 @@
-'use client';
+import React from "react";
+import { Navbar, NavbarBrand, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, NavbarContent, NavbarItem, Link, Button } from "@nextui-org/react";
 
-import React from 'react';
+// Replace "PiBankLogo.png" with the actual path to your image
+import piBankLogo from "../../public/images/image_2024-03-18_113053753-removebg-preview.png";
+import Image from "next/image";
 
-import Link from 'next/link';
-import { useSelectedLayoutSegment } from 'next/navigation';
-
-import useScroll from '@/hooks/use-scroll';
-import { cn } from '@/lib/utils';
-
-const Header = () => {
-  const scrolled = useScroll(5);
-  const selectedLayout = useSelectedLayoutSegment();
+export default function App() {
+  const menuItems = [
+    "Profile",
+    "Dashboard",
+    "Historiques",
+    "Balance",
+    "Transfer",
+    "Transactions",
+    "My Settings",
+    "Team Settings",
+    "Help & Feedback",
+    "Log Out",
+  ];
 
   return (
-    <div
-      className={cn(
-        `sticky inset-x-0 top-0 z-30 w-full transition-all border-b border-gray-200`,
-        {
-          'border-b border-gray-200 bg-white/75 backdrop-blur-lg': scrolled,
-          'border-b border-gray-200 bg-white': selectedLayout,
-        },
-      )}
-    >
-      <div className="flex h-[47px] items-center justify-between px-4">
-        <div className="flex items-center space-x-4">
-          <Link
-            href="/"
-            className="flex flex-row space-x-3 items-center justify-center md:hidden"
-          >
-            <span className="h-7 w-7 bg-zinc-300 rounded-lg" />
-            <span className="font-bold text-xl flex ">Logo</span>
+    <Navbar disableAnimation isBordered>
+      <NavbarContent className="sm:hidden" justify="start">
+        <NavbarMenuToggle />
+      </NavbarContent>
+
+      <NavbarContent className="sm:hidden pr-3" justify="center">
+        <NavbarBrand>
+        <Image
+            src = {piBankLogo}
+            alt="PiBank Logo"
+            width="36"
+            height="36"
+            layout="fixed"
+            objectFit="cover"
+          />
+        <p className="font-bold text-inherit">PiBank</p>
+        </NavbarBrand>
+      </NavbarContent>
+
+      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+        <NavbarBrand>
+        <Image
+            src = {piBankLogo}
+            alt="PiBank Logo"
+            width="36"
+            height="36"
+            layout="fixed"
+            objectFit="cover"
+          />    
+          <p className="font-bold text-inherit">PiBank</p>
+        </NavbarBrand>
+        <NavbarItem>
+          <Link color="foreground" href="#">
+            Features
           </Link>
-        </div>
+        </NavbarItem>
+        <NavbarItem isActive>
+          <Link href="#" aria-current="page" color="warning">
+            Customers
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link color="foreground" href="#">
+            Integrations
+          </Link>
+        </NavbarItem>
+      </NavbarContent>
 
-        <div className="hidden md:block">
-          <div className="h-8 w-8 rounded-full bg-zinc-300 flex items-center justify-center text-center">
-            <span className="font-semibold text-sm">HQ</span>
-          </div>
-        </div>
-      </div>
-    </div>
+      <NavbarContent justify="end">
+        <NavbarItem className="hidden lg:flex">
+          <Link href="#">Login</Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Button as={Link} color="warning" href="#" variant="flat">
+            Sign Up
+          </Button>
+        </NavbarItem>
+      </NavbarContent>
+
+      <NavbarMenu>
+        {menuItems.map((item, index) => (
+          <NavbarMenuItem key={`${item}-${index}`}>
+            <Link
+              className="w-full"
+              color={
+                index === 2
+                  ? "warning"
+                  : index === menuItems.length - 1
+                  ? "danger"
+                  : "foreground"
+              }
+              href="#"
+              size="lg"
+            >
+              {item}
+            </Link>
+          </NavbarMenuItem>
+        ))}
+      </NavbarMenu>
+    </Navbar>
   );
-};
-
-export default Header;
+}
