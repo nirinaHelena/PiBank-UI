@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import useRouter from "next/router";
+import { usePathname } from "next/navigation";
 import piBankLogo from "../../public/images/image_2024-03-18_113053753-removebg-preview.png";
 import Image from "next/image";
 import { users } from "./mock/UsersMock";
@@ -22,8 +22,7 @@ const links: linkProps[] = [
 
 export default function Header  () {
   const [profileImage, setProfileImage] = useState<string | null>(null);
-  const router = useRouter();
-  const pathname = router.pathname;
+  const pathname = usePathname();
   return (
     <div className="w-full max-w-7xl mx-auto items-center justify-between px-5 sm:px-6 py-5 lg:px-0 flex">
       <div className="flex items-center">
