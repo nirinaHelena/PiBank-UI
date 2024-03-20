@@ -1,9 +1,9 @@
 import React from 'react';
 import Image from "next/image";
+import Link from "next/link";
 import backgroundImage from "../../../public/images/cyber-monday-sale-credit-cards-keyboard.jpg";
 
 const LandingPage= () => {
-
   return (
     <div className="h-screen flex flex-col items-center justify-center" >
     <Image
@@ -31,15 +31,16 @@ const LandingPage= () => {
           </div>
 
           <div className="mt-8 flex flex-row justify-between">
+            <Link href="/dashboard">
             <button className="py-2 px-4 bg-red-700 text-white rounded-md">
               Connect
             </button>
-            <a href="#" className="py-2 px-4 bg-gray-400 text-gray-200 rounded-md">
+            </Link>
+            <a className="py-2 px-4 bg-black text-gray-200 rounded-md">
               Learn More
             </a>
           </div>
         </main>
-
         <footer className="mt-8">
           <div className="flex flex-row justify-between">
             <p className="text-gray-200">
