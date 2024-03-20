@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 
 function MyCard() {
   return (
    <div className="bg-gradient-to-tr from-slate-900 to-gray-700 shadow-md rounded-2xl p-2 flex flex-col items-center">
-    <div className="flex flex-row items-center">
+    <div className="flex flex-row items-center w-96 h-32-">
       <img src="/profile.png" alt="Profile picture" className="w-12 h-12 rounded-full" />
       <div className="mt-4">
         <h2 className='text-2xl text-white font-bold'>PiBank Card</h2>
