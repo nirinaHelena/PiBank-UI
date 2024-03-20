@@ -2,7 +2,11 @@ import React from 'react';
 import MyCard from "./MyCard"
 const Dashboard= () => {
   return (
-    <h1>Hello World</h1>
+    <main className="flex-grow">
+    <div className="mx-auto max-w-7xl">
+      <MyCard />
+    </div>
+  </main>
   );
 };
 
