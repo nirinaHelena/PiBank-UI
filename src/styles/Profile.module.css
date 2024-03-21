@@ -31,7 +31,7 @@
     top: 9pc;
     left: 8pc;
     border: solid 6px #f7f7f8;
-    background-image: url(/utilisateur.png);
+    background-image: url(../../public/images/profile.png);
     background-position: center center;
     background-size: cover;
 }

@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import piBankLogo from "../../public/images/image_2024-03-18_113053753-removebg-preview.png";
+import profilePicture from "../../public/images/profile.png"
 import Image from "next/image";
 import { users } from "./mock/UsersMock";
 import styles from "../styles/Navbar.module.css"
@@ -63,15 +64,16 @@ export default function Header  () {
       <div className="flex items-center gap-x-8">
         {users.map((user, index) => (
           <li key={index} className={styles.list}>
-            <Link href="/profile">
-            <div className={styles.profileImage}>
-                {profileImage ? (
-                  <Image src={profileImage} alt="" width={100} height={100} />
-                ) : (
-                  <Image src={user.profile_picture} alt="" width={100} height={100} />
-                )}
-              </div>
-            </Link>
+            <Link href="/profile" className="w-32">
+          <Image
+            src={profilePicture}
+            alt="PiBank Logo"
+            width="36"
+            height="36"
+            layout="fixed"
+            objectFit="cover"
+          />
+        </Link>
           </li>
         ))}
       </div>
