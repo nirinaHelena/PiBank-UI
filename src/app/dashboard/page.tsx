@@ -8,8 +8,10 @@ import RecentSales from "./components/RecentSales"
 
 const Dashboard= () => {
   return (
-    <main className=" flex flex-col ">
-    <div className="mx-auto max-w-5xl gap-6 justify-center flex flex-grow">
+    <main className="container m-auto">
+    <div className="mx-auto max-w-5xl justify-center m-auto grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2  gap-3">
+      <MyCard/>
+      <ExpensesStatistics/>
       <RecentSales/>
       <Card title="Transactions récentes" content={<TransactionsList />} />
 
