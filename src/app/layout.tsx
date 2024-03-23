@@ -19,9 +19,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn(inter.className)}>
-      <Header/>
-        {children}
+      <body className={cn("min-h-screen w-full bg-white text-black flex"
+      ,inter.className,
+        {
+          "debug-screens": process.env.NODE_ENV === "development"
+         }
+         )}
+         >
+      <Header/> 
+        <div className="p-8 w-full">{children}</div> 
       </body>
     </html>
   );
