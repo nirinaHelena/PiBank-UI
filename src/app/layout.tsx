@@ -4,6 +4,8 @@ import "./globals.css";
 import {cn} from "@/lib/utils"
 
 import  Header  from "@/components/header";
+import SideNavbar  from "@/components/SideNavbar";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,7 +28,8 @@ export default function RootLayout({
          }
          )}
          >
-      <Header/> 
+      <Header/>
+      <SideNavbar/> 
         <div className="p-8 w-full">{children}</div> 
       </body>
     </html>
