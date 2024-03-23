@@ -1,17 +1,14 @@
+"use client"
+
 import React from 'react'
 import { Nav } from './nav'
 import {
-    AlertCircle,
-    Archive,
-    ArchiveX,
-    File,
-    Inbox,
-    MessagesSquare,
-    Search,
-    Send,
-    ShoppingCart,
-    Trash2,
+    History,
+    LayoutDashboard,
+    ArrowUpDown,
+    Settings,
     Users2,
+    UsersRound,
   } from "lucide-react"
 type Props = {}
 
@@ -22,39 +19,33 @@ export default function SideNavbar({}: Props) {
             isCollapsed={false}
             links={[
               {
-                title: "Inbox",
-                label: "128",
-                icon: Inbox,
+                title: "Dashboard",
+                href: "/",
+                icon: LayoutDashboard,
                 variant: "default",
               },
               {
-                title: "Drafts",
-                label: "9",
-                icon: File,
+                title: "Users",
+                href: "/users",
+                icon: UsersRound,
                 variant: "ghost",
               },
               {
-                title: "Sent",
-                label: "",
-                icon: Send,
+                title: "Trasactions",
+                href: "/transaction",
+                icon: ArrowUpDown,
                 variant: "ghost",
               },
               {
-                title: "Junk",
-                label: "23",
-                icon: ArchiveX,
+                title: "History",
+                href:"/history",
+                icon: History,
                 variant: "ghost",
               },
               {
-                title: "Trash",
-                label: "",
-                icon: Trash2,
-                variant: "ghost",
-              },
-              {
-                title: "Archive",
-                label: "",
-                icon: Archive,
+                title: "Settings",
+                href:"/settings",
+                icon: Settings,
                 variant: "ghost",
               },
             ]}
