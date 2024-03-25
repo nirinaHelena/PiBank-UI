@@ -11,16 +11,17 @@ import { DataTable } from "@/components/DataTable";
 import { ColumnDef } from "@tanstack/react-table";
 import React from "react";
 import  PageTitle  from "@/components/PageTitle";
+import { Button } from "@/components/ui/button";
 
 type Props = {};
-type Payment = {
+type UserDetails = {
   name: string;
-  number: number;
+  amount: number;
   lastOrder: string;
   reason: string;
 };
 
-const columns: ColumnDef<Payment>[] = [
+const columns: ColumnDef<UserDetails>[] = [
   {
     accessorKey: "name",
     header: "Name",
@@ -40,8 +41,8 @@ const columns: ColumnDef<Payment>[] = [
     }
   },
   {
-    accessorKey: "number",
-    header: "Card Number"
+    accessorKey: "amount",
+    header: "Amount"
   },
   {
     accessorKey: "lastOrder",
@@ -53,32 +54,38 @@ const columns: ColumnDef<Payment>[] = [
   }
 ];
 
-const data: Payment[] = [
+const data: UserDetails[] = [
   {
-    name: "John Doe",
-    number: 567891237825878,
+    name: "Dera Miaro",
+    amount: 5_000_000,
     lastOrder: "2024-01-01",
     reason: "AWS"
   },
   {
-    name: "Alice Smith",
-    number: 4572325465894575,
+    name: "Nathanel Fanomezana",
+    amount: 1_200_000,
     lastOrder: "2024-02-25",
     reason: "Salary"
   },
   {
-    name: "Bob Johnson",
-    number: 4578693256987454,
+    name: "Nirina Helena",
+    amount: -400_000,
     lastOrder: "2024-03-20",
     reason: "Birthday of Mum"
   },
 ]
 
-export default function UsersPage({}: Props) {
+export default function AccountsPage({}: Props) {
   return (
-    <div className="flex flex-col gap-5  w-full">
-      <PageTitle title="Users" />
+    <div>
+       <div className="flex flex-row justify-between pb-5 gap-5 w-full items-center">
+       <PageTitle title="Users"/>
+       <Button className="rounded-md font-semibold ">Create account</Button>
+      </div>
+      <div>
       <DataTable columns={columns} data={data} />
+      </div>
     </div>
+   
   );
 }

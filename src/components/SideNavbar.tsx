@@ -49,14 +49,14 @@ export default function SideNavbar({}: Props) {
             variant: "default"
           },
           {
-            title: "Users",
-            href: "/users",
+            title: "Accounts",
+            href: "/account",
             icon: UsersRound,
             variant: "ghost"
           },
           {
-            title: "Ordrs",
-            href: "/orders",
+            title: "Transaction",
+            href: "/transactions",
             icon: ShoppingCart,
             variant: "ghost"
           },
