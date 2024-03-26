@@ -5,24 +5,24 @@ import backgroundImage from "../../../public/images/cyber-monday-sale-credit-car
 const LandingPage= () => {
 
   return (
-    <div className="h-screen flex flex-col items-center justify-center" >
+    <div className="h-screen flex flex-col" >
     <Image
         src={backgroundImage}
         alt='Background Image'
         layout='fill'
         objectFit='cover'
         />
-      <div className="max-w-7xl mx-auto relative">
+      <div className="max-w-7xl mx-auto mt-5 relative">
         <header className="flex flex-col items-center">
-          <h1 className="text-3xl font-bold text-gray-100">PiBank</h1>
+          <h1 className="text-5xl font-bold text-gray-100">PiBank</h1>
           <p className="mt-4 text-gray-200">
             The Bank of the Future - Easy, Secure, Fast
           </p>
         </header>
 
-        <main className="mt-8 flex flex-col">
+        <main className="mt-40 flex flex-col">
           <div className="flex flex-col items-center">
-            <h2 className="text-2xl font-bold text-gray-100">
+            <h2 className="text-4xl font-bold text-gray-100">
               Experience Banking in a New Way
             </h2>
             <p className="mt-4 text-gray-200">
@@ -30,29 +30,29 @@ const LandingPage= () => {
             </p>
           </div>
 
-          <div className="mt-8 flex flex-row justify-between">
-            <button className="py-2 px-4 bg-red-700 text-white rounded-md">
+          <div className="mt-11 px-40 flex flex-row justify-between">
+            <button className="py-2 px-4 bg-red-700 text-white hover:scale-110 rounded-md">
               Connect
             </button>
-            <a href="#" className="py-2 px-4 bg-gray-400 text-gray-200 rounded-md">
+            <a href="#" className="py-2 px-4 bg-gray-950 text-gray-200 hover:scale-110 rounded-md">
               Learn More
             </a>
           </div>
         </main>
 
-        <footer className="mt-8">
+        <footer className="mt-48">
           <div className="flex flex-row justify-between">
             <p className="text-gray-200">
               Copyright © {new Date().getFullYear()} PiBank
             </p>
             <div className="flex flex-row">
-              <a href="#" className="mr-4 text-gray-100">
+              <a href="#" className="mr-4 text-gray-100 hover:underline">
                 About Us
               </a>
-              <a href="#" className=" mr-4 text-gray-100">
+              <a href="#" className=" mr-4 text-gray-100 hover:underline">
                 Programs
               </a>
-              <a href="#" className="mr-2 text-gray-100">
+              <a href="#" className="mr-2 text-gray-100 hover:underline">
                 Contact Us
               </a>
             </div>
