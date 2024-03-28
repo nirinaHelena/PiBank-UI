@@ -9,8 +9,8 @@ import SalesCard, { SalesProps } from "@/components/SalesCard";
 
 const cardData: CardProps[] = [
   {
-    label: "Total Revenue",
-    amount: "$45,231.89",
+    label: "Total Income",
+    amount: "Ar 3 540 000",
     discription: "+20.1% from last month",
     icon: DollarSign
   },
