@@ -3,9 +3,9 @@ import PageTitle from "@/components/PageTitle";
 
 const Dashboard= () => {
   return (
-      <div>
-        <PageTitle title=""/>
-          HomePage
+      <div className='flex flex-col gap-5  w-full'>
+        <PageTitle title="Dashboard"/>
+          
       </div>
   );
 };
