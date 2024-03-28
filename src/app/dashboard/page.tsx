@@ -8,25 +8,25 @@ const cardData: CardProps[] = [
   {
     label: "Total Income",
     amount: "Ar 3 540 000",
-    discription: "+20.1% from last month",
+    description: "+20.1% from last month",
     icon: DollarSign
   },
   {
-    label: "Subscriptions",
-    amount: "+2350",
-    discription: "+180.1% from last month",
-    icon: Users
+    label: "Last expenses",
+    amount: "Ar 150000",
+    description: "Jirama",
+    icon: CreditCard
   },
   {
     label: "Sales",
     amount: "+12,234",
-    discription: "+19% from last month",
+    description: "+19% from last month",
     icon: CreditCard
   },
   {
     label: "Active Now",
     amount: "+573",
-    discription: "+201 since last hour",
+    description: "+201 since last hour",
     icon: Activity
   }
 ];
@@ -79,7 +79,7 @@ export default function Home() {
           <Card
             key={i}
             amount={d.amount}
-            discription={d.discription}
+            description={d.description}
             icon={d.icon}
             label={d.label}
           />
