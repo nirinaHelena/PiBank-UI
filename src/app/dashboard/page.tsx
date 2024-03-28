@@ -1,7 +1,4 @@
-/** @format */
-
 import PageTitle from "@/components/PageTitle";
-import Image from "next/image";
 import { DollarSign, Users, CreditCard, Activity } from "lucide-react";
 import Card, { CardContent, CardProps } from "@/components/Card";
 import BarChart from "@/components/BarChart";
@@ -9,8 +6,8 @@ import SalesCard, { SalesProps } from "@/components/SalesCard";
 
 const cardData: CardProps[] = [
   {
-    label: "Total Revenue",
-    amount: "$45,231.89",
+    label: "Total Income",
+    amount: "Ar 3 540 000",
     discription: "+20.1% from last month",
     icon: DollarSign
   },
@@ -34,39 +31,50 @@ const cardData: CardProps[] = [
   }
 ];
 
-const uesrSalesData: SalesProps[] = [
+const userSalesData: SalesProps[] = [
   {
     name: "Olivia Martin",
-    email: "olivia.martin@email.com",
-    saleAmount: "+$1,999.00"
+    account: "**** **** **** 1258",
+    saleAmount: "+2500000",
+    date: "2024-03-25"
   },
   {
     name: "Jackson Lee",
-    email: "isabella.nguyen@email.com",
-    saleAmount: "+$1,999.00"
+    account: "**** **** **** 5478",
+    saleAmount: "+600000",
+    date: "2024-03-24"
   },
   {
     name: "Isabella Nguyen",
-    email: "isabella.nguyen@email.com",
-    saleAmount: "+$39.00"
+    account: "**** **** **** 6512",
+    saleAmount: "-800000",
+    date: "2024-03-23"
   },
   {
-    name: "William Kim",
-    email: "will@email.com",
-    saleAmount: "+$299.00"
+    name: "Isabella Nguyen",
+    account: "**** **** **** 9513",
+    saleAmount: "-150000",
+    date: "2024-03-22"
   },
   {
-    name: "Sofia Davis",
-    email: "sofia.davis@email.com",
-    saleAmount: "+$39.00"
-  }
+    name: "Isabella Nguyen",
+    account: "**** **** **** 7514",
+    saleAmount: "+200000",
+    date: "2024-03-21"
+  },
 ];
 
+const sortTransactionsByDate = (transactions: SalesProps[]) => {
+  return transactions.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+};
+
 export default function Home() {
+  const recentTransactions = sortTransactionsByDate(userSalesData).slice(0, 5);
+
   return (
-    <div className="flex flex-col gap-5  w-full">
+    <div className="flex flex-col gap-5 w-full">
       <PageTitle title="Dashboard" />
-      <section className="grid w-full grid-cols-1 gap-4 gap-x-8 transition-all sm:grid-cols-2 xl:grid-cols-4">
+      <section className="grid w-full grid-cols-1 gap-4 gap-x-8 transition-all sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
         {cardData.map((d, i) => (
           <Card
             key={i}
@@ -77,30 +85,28 @@ export default function Home() {
           />
         ))}
       </section>
-      <section className="grid grid-cols-1  gap-4 transition-all lg:grid-cols-2">
+      <section className="grid grid-cols-1 gap-4 transition-all lg:grid-cols-2">
         <CardContent>
           <p className="p-4 font-semibold">Overview</p>
-
           <BarChart />
         </CardContent>
         <CardContent className="flex justify-between gap-4">
           <section>
-            <p>Recent Sales</p>
+            <p>Recent Transaction</p>
             <p className="text-sm text-gray-400">
-              You made 265 sales this month.
+              See here your last Transaction
             </p>
           </section>
-          {uesrSalesData.map((d, i) => (
+          {recentTransactions.map((d, i) => (
             <SalesCard
               key={i}
-              email={d.email}
+              account={d.account}
               name={d.name}
               saleAmount={d.saleAmount}
+              date={d.date}
             />
           ))}
         </CardContent>
-
-        {/*  */}
       </section>
     </div>
   );
