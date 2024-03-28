@@ -3,33 +3,60 @@ import React, { useEffect } from 'react';
 import Chart from 'chart.js';
 import { error } from 'console';
 
-const RecentSales = () => {
+const BarChart = () => {
   const salesData = [
     {
-      name: 'Olivia Martin',
+      name: 'Jan',
       email: 'olivia.martin@email.com',
-      amount: 1999,
+      amount: Math.floor(Math.random() * 5000) + 100099,
     },
     {
-      name: 'Jackson Lee',
+      name: 'Feb',
       email: 'jackson.lee@email.com',
-      amount: 39,
+      amount: Math.floor(Math.random() * 5000) + 1000,
     },
     {
-      name: 'Isabella Nguyen',
+      name: 'Mar',
       email: 'isabella.nguyen@email.com',
-      amount: 299,
+      amount: Math.floor(Math.random() * 5000) + 10009,
     },
     {
-      name: 'William Kim',
+      name: 'Apr',
       email: 'will@email.com', // Correction de l'email de William Kim
-      amount: 99,
+      amount: Math.floor(Math.random() * 5000) + 1000,
     },
     {
-      name: 'Sofia Davis',
+      name: 'May',
       email: 'sofia.davis@email.com',
-      amount: 39,
+      amount: Math.floor(Math.random() * 5000) + 1000,
+    },{
+      name: "Jun",
+      amount: Math.floor(Math.random() * 5000) + 1000
     },
+    {
+      name: "Jul",
+      amount: Math.floor(Math.random() * 5000) + 1000
+    },
+    {
+      name: "Aug",
+      amount: Math.floor(Math.random() * 5000) + 1000
+    },
+    {
+      name: "Sep",
+      amount: Math.floor(Math.random() * 5000) + 1000
+    },
+    {
+      name: "Oct",
+      amount: Math.floor(Math.random() * 5000) + 1000
+    },
+    {
+      name: "Nov",
+      amount: Math.floor(Math.random() * 5000) + 1000
+    },
+    {
+      name: "Dec",
+      amount: Math.floor(Math.random() * 5000) + 1000
+    }
   ];
 
   const salesChartData = {
@@ -86,4 +113,4 @@ const RecentSales = () => {
   );
 };
 
-export default RecentSales;
+export default BarChart;
