@@ -16,7 +16,7 @@ const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#CB2821"];
 
 export default function CircleChart() {
  return (
-    <ResponsiveContainer width={"100%"} height={300}>
+    <ResponsiveContainer width={"100%"} height={400}>
       <PieChart>
         <Pie
           data={categoryData}
@@ -26,10 +26,11 @@ export default function CircleChart() {
           cy="50%"
           outerRadius={80}
           fill="#8884d8"
-          label
+          label={({name, value }) => `${(value / 1000).toFixed(0)}k Ar in ${(name)}`} // Affichage des montants au millier près
+
         >
-          {categoryData.map((entry, value) => (
-            <Cell key={`${value} Ar`} fill={COLORS[value % COLORS.length]} />
+          {categoryData.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
         <Tooltip />
