@@ -112,7 +112,7 @@ function Transfer() {
       <PageTitle title="Transfers" />
       <Dialog>
         <DialogTrigger asChild>
-          <Button variant="outline" className="font-semibold  rounded-sm">Make a Transaction</Button>
+          <Button variant="outline" className="font-semibold  rounded-sm">Make a Transfer</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[400px]">
           <DialogHeader>
