@@ -68,7 +68,7 @@ function FormAccount() {
 
       <div className="mb-4">
         <label className="block mb-1">Account Number</label>
-        <input type="number" {...register("accountNumber")} className="w-full px-3 py-2 border rounded focus:outline-none focus:border-blue-950" readOnly />
+        <input type="number" {...register("accountNumber")} className="w-full px-3 py-2 border rounded focus:outline-none focus:border-blue-950"/>
         {errors.accountNumber && <p className="text-red-700">{errors.accountNumber.message}</p>}
       </div>
 
