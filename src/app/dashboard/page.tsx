@@ -1,5 +1,5 @@
 import PageTitle from "@/components/PageTitle";
-import { DollarSign, Users, CreditCard, Activity } from "lucide-react";
+import { DollarSign, Percent, CreditCard,Wallet } from "lucide-react";
 import Card, { CardContent, CardProps } from "@/components/Card";
 import BarChart from "@/components/BarChart";
 import SalesCard, { SalesProps } from "@/components/SalesCard";
@@ -8,26 +8,26 @@ const cardData: CardProps[] = [
   {
     label: "Total Income",
     amount: "Ar 3 540 000",
-    discription: "+20.1% from last month",
-    icon: DollarSign
-  },
-  {
-    label: "Subscriptions",
-    amount: "+2350",
-    discription: "+180.1% from last month",
-    icon: Users
-  },
-  {
-    label: "Sales",
-    amount: "+12,234",
-    discription: "+19% from last month",
+    description: "+20.1% from last month",
     icon: CreditCard
   },
   {
-    label: "Active Now",
-    amount: "+573",
-    discription: "+201 since last hour",
-    icon: Activity
+    label: "Loans",
+    amount: "Ar 500 000",
+    description: "amount borrowed from bank",
+    icon: DollarSign
+  },
+  {
+    label: "Economy",
+    amount: "+12,234",
+    description: "+12% from last month",
+    icon: Wallet
+  },
+  {
+    label: "Interest on loans",
+    amount: "13%",
+    description: "amount of interest on bank loans",
+    icon: Percent
   }
 ];
 
@@ -79,7 +79,7 @@ export default function Home() {
           <Card
             key={i}
             amount={d.amount}
-            discription={d.discription}
+            description={d.description}
             icon={d.icon}
             label={d.label}
           />
