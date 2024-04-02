@@ -89,12 +89,12 @@ export default function AccountsPage({}: Props) {
   return (
     <div>
        <div className="flex flex-row justify-between pb-5 gap-5 w-full items-center">
-       <PageTitle title="Users"/>
+       <PageTitle title="Accounts"/>
        <Dialog>
       <DialogTrigger asChild>
         <Button variant="outline" className="font-semibold  rounded-sm">Create account</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[400px]">
         <DialogHeader>
           <DialogTitle>Create an Account</DialogTitle>
           <DialogDescription>
