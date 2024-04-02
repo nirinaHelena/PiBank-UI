@@ -13,7 +13,7 @@
 /** @format */
 "use client"
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { ColumnDef } from "@tanstack/react-table";
 import { DataTable } from "@/components/DataTable";
 import { Button } from "@/components/ui/button";
@@ -32,6 +32,31 @@ import { cn } from "@/lib/utils";
 
 
 type Props= {};
+
+interface User {
+  id : string;
+  firstName : string;
+  lastName : string;
+}
+
+interface Account {
+  id : string ;
+  accountNumber : string ;
+  idUser : string;
+}
+
+interface Transfer {
+  id : string;
+  amount : number;
+  idAccount : string;
+}
+
+interface Transaction {
+  idTransfer : string;
+  date : string ;
+  type : string; //"INCOME" or "OUTCOME"
+}
+
 type TransferDetails = {
   name: string;
   account: string;
@@ -71,41 +96,56 @@ const columns: ColumnDef<TransferDetails>[] = [
     header: "Date"
   }
 ];
-const data: TransferDetails[] = [
-    {
-      name: "Olivia Martin",
-      account: "**** **** **** 1258",
-      saleAmount: "+2500000",
-      date: "2024-03-25"
-    },
-    {
-      name: "Jackson Lee",
-      account: "**** **** **** 5478",
-      saleAmount: "+600000",
-      date: "2024-03-24"
-    },
-    {
-      name: "Isabella Nguyen",
-      account: "**** **** **** 6512",
-      saleAmount: "-800000",
-      date: "2024-03-23"
-    },
-    {
-      name: "Isabella Nguyen",
-      account: "**** **** **** 9513",
-      saleAmount: "-150000",
-      date: "2024-03-22"
-    },
-    {
-      name: "Isabella Nguyen",
-      account: "**** **** **** 7514",
-      saleAmount: "+200000",
-      date: "2024-03-21"
-    },
-  ];
+
+const fetchData = async () : Promise<TransferDetails[]> => {
+  const usersResponse = await fetch("http://localhost:8080/user");
+  const users : User[] = await usersResponse.json();
+
+  const accountsResponse = await fetch("http://loaclhost:8080/account");
+  const accounts : Account[] = await accountsResponse.json();
+
+  const transfersResponse = await fetch("http://localhost:8080/transfer");
+  const transfers : Transfer[] = await transfersResponse.json();
+  
+  const transactionsResponse = await fetch("http://localhost:8080/transaction");
+  const transactions : Transaction[] = await transactionsResponse.json();
+
+  const transferDetails : TransferDetails[] = [];
+
+  for(const transaction of transactions){
+    const matchedTransfer = transfers.find((t) => t.id === transaction.idTransfer);
+    if(matchedTransfer){
+      const matchedAccount = accounts.find((a) => a.id === matchedTransfer.idAccount);
+      if(matchedAccount){
+        const user = users.find((u) => u.id === matchedAccount.idUser);
+        if(user){
+          const saleAmount = transaction.type === "INCOME" ? "+" : "-";
+          transferDetails.push({
+            name : `${user.firstName} ${user.lastName}`,
+            account : matchedAccount.accountNumber,
+            saleAmount : `<span class="math-inline">\{saleAmount\}</span>{matchedTransfer.amount}`,
+            date : transaction.date,
+          });
+        }
+      }
+    }
+  }
+  return transferDetails;
+};
 
 
 function Transfer() {
+  const [data, setData] = useState<TransferDetails[]>([]);
+
+  useEffect(() => {
+    const fetchTransfers = async () => {
+      const transferDetails = await fetchData();
+      setData(transferDetails);
+    };
+    
+    fetchTransfers();
+  }, []);
+  
   return (
     <div>
      <div className="flex flex-row justify-between pb-5 gap-5 w-full items-center">
