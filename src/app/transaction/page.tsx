@@ -11,8 +11,9 @@
  */
 
 /** @format */
-"use client"
+"use client";
 
+import { DataTable } from "@/components/DataTable";
 import { ColumnDef } from "@tanstack/react-table";
 import React from "react";
 import PageTitle from "@/components/PageTitle";
@@ -27,18 +28,19 @@ import {
   DialogTrigger,
   DialogFooter,
 } from "@/components/ui/dialog"
+import TrnasactionForm from "@/components/TransactionForm"
 import TransactionForm from "@/components/TransactionForm";
 
 
 type Props = {};
-type Transaction = {
+type Payment = {
   order: string;
   status: string;
   lastOrder: string;
   label: string;
 };
 
-const columns: ColumnDef<Transaction>[] = [
+const columns: ColumnDef<Payment>[] = [
   {
     accessorKey: "order",
     header: "Order"
@@ -65,35 +67,35 @@ const columns: ColumnDef<Transaction>[] = [
     header: "Last Order"
   },
   {
-    accessorKey: "method",
-    header: "Method"
+    accessorKey: "label",
+    header: "label"
   }
 ];
 
-const data: Transaction[] = [
+const data: Payment[] = [
   {
     order: "ORD001",
     status: "Pending",
-    lastOrder: "2023-01-15",
-    label: "Credit Card"
+    lastOrder: "2023-01-31",
+    label: "Salary"
   },
   {
     order: "ORD002",
     status: "Processing",
-    lastOrder: "2023-02-20",
-    label: "PayPal"
+    lastOrder: "2023-09-29",
+    label: "Gifts"
   },
   {
     order: "ORD003",
     status: "Completed",
-    lastOrder: "2023-03-10",
-    label: "Stripe"
+    lastOrder: "2023-03-01",
+    label: "Party"
   },
   {
     order: "ORD004",
     status: "Pending",
     lastOrder: "2023-04-05",
-    label: "Venmo"
+    label: "Gasoil"
   },
   {
     order: "ORD005",
@@ -103,15 +105,15 @@ const data: Transaction[] = [
   },
   {
     order: "ORD006",
-    status: "Processing",
-    lastOrder: "2023-06-18",
-    label: "Apple Pay"
+    status: "Completed",
+    lastOrder: "2023-06-29",
+    label: "Salary"
   },
   {
     order: "ORD007",
     status: "Completed",
     lastOrder: "2023-07-22",
-    label: "Google Pay"
+    label: "Video Games"
   },
   {
     order: "ORD008",
@@ -123,43 +125,43 @@ const data: Transaction[] = [
     order: "ORD009",
     status: "Processing",
     lastOrder: "2023-09-05",
-    label: "Alipay"
+    label: "Gasoil"
   },
   {
     order: "ORD010",
     status: "Completed",
     lastOrder: "2023-10-18",
-    label: "WeChat Pay"
+    label: "Travel"
   },
   {
     order: "ORD011",
     status: "Pending",
     lastOrder: "2023-11-25",
-    label: "Square Cash"
+    label: "Internet"
   },
   {
     order: "ORD012",
     status: "Completed",
     lastOrder: "2023-12-08",
-    label: "Zelle"
+    label: "Restaurant"
   },
   {
     order: "ORD013",
     status: "Processing",
     lastOrder: "2024-01-15",
-    label: "Stripe"
+    label: "Facture"
   },
   {
     order: "ORD014",
     status: "Completed",
     lastOrder: "2024-02-20",
-    label: "PayPal"
+    label: "Pension"
   },
   {
     order: "ORD015",
     status: "Pending",
     lastOrder: "2024-03-30",
-    label: "Credit Card"
+    label: "Salary"
   }
 ];
 
@@ -184,6 +186,9 @@ export default function Transaction({}: Props) {
 
         </DialogContent>
       </Dialog>
+      </div>
+      <div>
+      <DataTable columns={columns} data={data} />
       </div>
       </div>
   );

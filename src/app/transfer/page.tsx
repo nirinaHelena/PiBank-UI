@@ -14,7 +14,6 @@
 "use client"
 
 import React from 'react'
-import SalesCard, { SalesProps } from "@/components/SalesCard";
 import { ColumnDef } from "@tanstack/react-table";
 import { DataTable } from "@/components/DataTable";
 import { Button } from "@/components/ui/button";
@@ -29,9 +28,10 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog"
 import TransferForm from "@/components/TransferForm";
+import { cn } from "@/lib/utils";
+
 
 type Props= {};
-
 type TransferDetails = {
   name: string;
   account: string;
@@ -104,16 +104,11 @@ const data: TransferDetails[] = [
     },
   ];
 
-  const sortTransactionsByDate = (transactions: SalesProps[]) => {
-    return transactions.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-  };
-  
-function Transfer() {
-    const recentTransactions = sortTransactionsByDate(userSalesData).slice(0, 5);
 
+function Transfer() {
   return (
     <div>
-    <div className="flex flex-row justify-between pb-5 gap-5 w-full items-center">
+     <div className="flex flex-row justify-between pb-5 gap-5 w-full items-center">
       <PageTitle title="Transfers" />
       <Dialog>
         <DialogTrigger asChild>
@@ -130,12 +125,11 @@ function Transfer() {
               <TransferForm/>
 
           </DialogContent>
-      </Dialog>
-    
-<div>
+      </Dialog> 
+    </div>
+  <div>
       <DataTable columns={columns} data={data} />
-      </div>
-      </div>
+        </div>
       </div>
   );
 }
