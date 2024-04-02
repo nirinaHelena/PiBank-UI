@@ -6,10 +6,8 @@ function App() {
 
   return (
     <NextUIProvider navigate={navigate}>
-      {/* Your app here... */}
       <Routes>
         <Route path="/Home" element={<HomePage />} />
-        {/* ... */}
       </Routes>
     </NextUIProvider>
   )
