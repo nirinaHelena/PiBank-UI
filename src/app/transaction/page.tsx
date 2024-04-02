@@ -15,7 +15,7 @@
 
 import { DataTable } from "@/components/DataTable";
 import { ColumnDef } from "@tanstack/react-table";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PageTitle from "@/components/PageTitle";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -33,6 +33,15 @@ import TransactionForm from "@/components/TransactionForm";
 
 
 type Props = {};
+
+type Transfer = {
+  ref : string,
+  registrationDate : string;
+  effectiveDate : string;
+  label : string;
+  isCanceled : boolean;
+};
+
 type Payment = {
   order: string;
   status: string;
@@ -72,100 +81,38 @@ const columns: ColumnDef<Payment>[] = [
   }
 ];
 
-const data: Payment[] = [
-  {
-    order: "ORD001",
-    status: "Pending",
-    lastOrder: "2023-01-31",
-    label: "Salary"
-  },
-  {
-    order: "ORD002",
-    status: "Processing",
-    lastOrder: "2023-09-29",
-    label: "Gifts"
-  },
-  {
-    order: "ORD003",
-    status: "Completed",
-    lastOrder: "2023-03-01",
-    label: "Party"
-  },
-  {
-    order: "ORD004",
-    status: "Pending",
-    lastOrder: "2023-04-05",
-    label: "Gasoil"
-  },
-  {
-    order: "ORD005",
-    status: "Completed",
-    lastOrder: "2023-05-12",
-    label: "Bank Transfer"
-  },
-  {
-    order: "ORD006",
-    status: "Completed",
-    lastOrder: "2023-06-29",
-    label: "Salary"
-  },
-  {
-    order: "ORD007",
-    status: "Completed",
-    lastOrder: "2023-07-22",
-    label: "Video Games"
-  },
-  {
-    order: "ORD008",
-    status: "Pending",
-    lastOrder: "2023-08-30",
-    label: "Cryptocurrency"
-  },
-  {
-    order: "ORD009",
-    status: "Processing",
-    lastOrder: "2023-09-05",
-    label: "Gasoil"
-  },
-  {
-    order: "ORD010",
-    status: "Completed",
-    lastOrder: "2023-10-18",
-    label: "Travel"
-  },
-  {
-    order: "ORD011",
-    status: "Pending",
-    lastOrder: "2023-11-25",
-    label: "Internet"
-  },
-  {
-    order: "ORD012",
-    status: "Completed",
-    lastOrder: "2023-12-08",
-    label: "Restaurant"
-  },
-  {
-    order: "ORD013",
-    status: "Processing",
-    lastOrder: "2024-01-15",
-    label: "Facture"
-  },
-  {
-    order: "ORD014",
-    status: "Completed",
-    lastOrder: "2024-02-20",
-    label: "Pension"
-  },
-  {
-    order: "ORD015",
-    status: "Pending",
-    lastOrder: "2024-03-30",
-    label: "Salary"
-  }
-];
+const fetchData =async () : Promise<Payment[]> => {
+  const tranfersResponse = await fetch("http://localhost:8080/transfer");
+  const transfers : Transfer[] = await tranfersResponse.json();
+
+  const paymentData : Payment[] = transfers.map((transfer) => {
+    const status = 
+      new Date(transfer.effectiveDate) <= new Date() && !transfer.isCanceled
+        ? "Completed"
+        : transfer.isCanceled
+        ?"Pending"
+        : "Processing";
+    const lastOrder = status === "Pending" ? transfer.registrationDate : transfer.effectiveDate;
+    return{
+      order : transfer.ref,
+      status,
+      lastOrder,
+      label : transfer.label,
+    };
+  });
+  return paymentData;
+};
 
 export default function Transaction({}: Props) {
+  const [data, setData] = useState<Payment[]>([]);
+
+  useEffect(() =>{
+    const fetchPayments =async () => {
+      const paymentData = await fetchData();
+      setData(paymentData);
+    };
+    fetchPayments();
+  }, []);
   return (
     <div>
       <div className="flex flex-row justify-between pb-5 gap-5 w-full items-center">
