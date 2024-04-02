@@ -18,6 +18,19 @@ import { ColumnDef } from "@tanstack/react-table";
 import React from "react";
 import PageTitle from "@/components/PageTitle";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+} from "@/components/ui/dialog"
+import TrnasactionForm from "@/components/TransactionForm"
+import TransactionForm from "@/components/TransactionForm";
+
 
 type Props = {};
 type Payment = {
@@ -154,9 +167,29 @@ const data: Payment[] = [
 
 export default function Transaction({}: Props) {
   return (
-    <div className="flex flex-col gap-5  w-full">
+    <div>
+      <div className="flex flex-row justify-between pb-5 gap-5 w-full items-center">
       <PageTitle title="Transactions" />
+      <Dialog>
+        <DialogTrigger asChild>
+        <Button variant="outline" className="font-semibold  rounded-sm">Make a Transaction</Button>
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-[400px]">
+          <DialogHeader>
+            <DialogTitle> Make a Transaction</DialogTitle>
+            <DialogDescription>
+              Make a Transaction. Follow it on the table
+            </DialogDescription>
+          </DialogHeader>
+
+          <TransactionForm/>
+
+        </DialogContent>
+      </Dialog>
+      </div>
+      <div>
       <DataTable columns={columns} data={data} />
-    </div>
+      </div>
+      </div>
   );
 }

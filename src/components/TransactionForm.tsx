@@ -9,7 +9,7 @@ const formSchema = z.object({
   amount: z.number().min(0, "Amount must be a positive number."),
 });
 
-function WithdrawalForm() {
+function TransactionForm() {
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -48,4 +48,4 @@ function WithdrawalForm() {
   );
 }
 
-export default WithdrawalForm;
+export default TransactionForm;
