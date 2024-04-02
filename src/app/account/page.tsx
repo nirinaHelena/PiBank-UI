@@ -9,7 +9,7 @@
 
 import { DataTable } from "@/components/DataTable";
 import { ColumnDef } from "@tanstack/react-table";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import  PageTitle  from "@/components/PageTitle";
 import { Button } from "@/components/ui/button";
 import {
@@ -24,6 +24,22 @@ import {
 import FormAccount from "@/components/Form"
 
 type Props = {};
+
+interface User {
+  id :  string;
+  firstName : string;
+  lastName : string;
+  birthday : {
+    nanos : 0;
+  };
+  netMonthSalary : number;
+}
+
+interface Account {
+  accountNumber : string;
+  idUser : string;
+}
+
 type UserDetails = {
   name: string;
   salary: number;
@@ -64,28 +80,35 @@ const columns: ColumnDef<UserDetails>[] = [
   }
 ];
 
-const data: UserDetails[] = [
-  {
-    name: "Dera Miaro",
-    salary: 4_000_000,
-    birthday: "1984-10-01",
-    accountNumber: "**** **** **** 4521"
-  },
-  {
-    name: "Nathanel Fanomezana",
-    salary: 1_200_000,
-    birthday: "1995-02-25",
-    accountNumber: "**** **** **** 1278"
-  },
-  {
-    name: "Nirina Helena",
-    salary: 400_000,
-    birthday: "2003-03-20",
-    accountNumber: "**** **** **** 5687"
-  },
-]
+const fetchData =async () : Promise<UserDetails[]> => {
+  const usersResponse = await fetch("http://localhost:8080/user");
+  const users : User[] = await usersResponse.json();
+
+  const accountsResponse = await fetch("http://localhost:8080/account");
+  const accounts : Account[] = await accountsResponse.json();
+
+  const userDetails = users.map((user) =>{
+    const matchingAccount = accounts.find((account) => account.idUser == user.id);
+    return{
+      name : `${user.firstName} ${user.lastName}`,
+      salary : user.netMonthSalary,
+      birthday : new Date(user.birthday.nanos).toLocaleDateString(),
+      accountNumber : matchingAccount ? matchingAccount.accountNumber : "",
+    };
+  });
+  return userDetails;
+};
 
 export default function AccountsPage({}: Props) {
+  const [data, setData] = useState<UserDetails[]>([]);
+  useEffect(() => {
+    const fetchUsers =async () => {
+      const userDetails = await fetchData();
+      setData(userDetails);
+    };
+    fetchUsers();
+  }, []);
+
   return (
     <div>
        <div className="flex flex-row justify-between pb-5 gap-5 w-full items-center">
