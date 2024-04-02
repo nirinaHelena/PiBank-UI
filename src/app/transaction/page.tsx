@@ -11,9 +11,8 @@
  */
 
 /** @format */
-"use client";
+"use client"
 
-import { DataTable } from "@/components/DataTable";
 import { ColumnDef } from "@tanstack/react-table";
 import React from "react";
 import PageTitle from "@/components/PageTitle";
@@ -28,19 +27,18 @@ import {
   DialogTrigger,
   DialogFooter,
 } from "@/components/ui/dialog"
-import TrnasactionForm from "@/components/TransactionForm"
 import TransactionForm from "@/components/TransactionForm";
 
 
 type Props = {};
-type Payment = {
+type Transaction = {
   order: string;
   status: string;
   lastOrder: string;
-  method: string;
+  label: string;
 };
 
-const columns: ColumnDef<Payment>[] = [
+const columns: ColumnDef<Transaction>[] = [
   {
     accessorKey: "order",
     header: "Order"
@@ -72,96 +70,96 @@ const columns: ColumnDef<Payment>[] = [
   }
 ];
 
-const data: Payment[] = [
+const data: Transaction[] = [
   {
     order: "ORD001",
     status: "Pending",
     lastOrder: "2023-01-15",
-    method: "Credit Card"
+    label: "Credit Card"
   },
   {
     order: "ORD002",
     status: "Processing",
     lastOrder: "2023-02-20",
-    method: "PayPal"
+    label: "PayPal"
   },
   {
     order: "ORD003",
     status: "Completed",
     lastOrder: "2023-03-10",
-    method: "Stripe"
+    label: "Stripe"
   },
   {
     order: "ORD004",
     status: "Pending",
     lastOrder: "2023-04-05",
-    method: "Venmo"
+    label: "Venmo"
   },
   {
     order: "ORD005",
     status: "Completed",
     lastOrder: "2023-05-12",
-    method: "Bank Transfer"
+    label: "Bank Transfer"
   },
   {
     order: "ORD006",
     status: "Processing",
     lastOrder: "2023-06-18",
-    method: "Apple Pay"
+    label: "Apple Pay"
   },
   {
     order: "ORD007",
     status: "Completed",
     lastOrder: "2023-07-22",
-    method: "Google Pay"
+    label: "Google Pay"
   },
   {
     order: "ORD008",
     status: "Pending",
     lastOrder: "2023-08-30",
-    method: "Cryptocurrency"
+    label: "Cryptocurrency"
   },
   {
     order: "ORD009",
     status: "Processing",
     lastOrder: "2023-09-05",
-    method: "Alipay"
+    label: "Alipay"
   },
   {
     order: "ORD010",
     status: "Completed",
     lastOrder: "2023-10-18",
-    method: "WeChat Pay"
+    label: "WeChat Pay"
   },
   {
     order: "ORD011",
     status: "Pending",
     lastOrder: "2023-11-25",
-    method: "Square Cash"
+    label: "Square Cash"
   },
   {
     order: "ORD012",
     status: "Completed",
     lastOrder: "2023-12-08",
-    method: "Zelle"
+    label: "Zelle"
   },
   {
     order: "ORD013",
     status: "Processing",
     lastOrder: "2024-01-15",
-    method: "Stripe"
+    label: "Stripe"
   },
   {
     order: "ORD014",
     status: "Completed",
     lastOrder: "2024-02-20",
-    method: "PayPal"
+    label: "PayPal"
   },
   {
     order: "ORD015",
     status: "Pending",
     lastOrder: "2024-03-30",
-    method: "Credit Card"
+    label: "Credit Card"
   }
 ];
 
@@ -186,9 +184,6 @@ export default function Transaction({}: Props) {
 
         </DialogContent>
       </Dialog>
-      </div>
-      <div>
-      <DataTable columns={columns} data={data} />
       </div>
       </div>
   );
