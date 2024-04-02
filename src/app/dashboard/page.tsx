@@ -1,7 +1,7 @@
 import PageTitle from "@/components/PageTitle";
 import { DollarSign, Percent, CreditCard,Wallet } from "lucide-react";
 import Card, { CardContent, CardProps } from "@/components/Card";
-import BarChart from "@/components/BarChart";
+import Charts from "@/components/Charts";
 
 const cardData: CardProps[] = [
   {
@@ -50,7 +50,7 @@ export default function Home() {
       <section className="grid grid-cols-1 gap-4 transition-all lg:grid-cols-2">
         <CardContent>
           <p className="p-4 font-semibold">Overview</p>
-          <BarChart />
+          <Charts />
         </CardContent>
       </section>
     </div>
