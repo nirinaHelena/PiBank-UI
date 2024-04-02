@@ -35,11 +35,16 @@ import TransactionForm from "@/components/TransactionForm";
 type Props = {};
 
 type Transfer = {
-  ref : string,
-  registrationDate : string;
-  effectiveDate : string;
+  id : string;
+  ref : string;
+  transferReason: string;
+  amount : string;
   label : string;
+  effectiveDate : string;
+  registrationDate : string;
   isCanceled : boolean;
+  accountSender : string;
+  accountReceiver : string;
 };
 
 type Payment = {

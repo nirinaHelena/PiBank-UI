@@ -3,16 +3,37 @@ import { DollarSign, Percent, CreditCard,Wallet } from "lucide-react";
 import Card, { CardContent, CardProps } from "@/components/Card";
 import BarChart from "@/components/BarChart";
 import CircleChart from "@/components/CircleChart";
+import { useEffect, useState } from "react";
+
+type Account = {
+  id : string;
+  accountNumber : string;
+  mainBalance : number;
+  loans : number;
+  interestLoans : number;
+  creditAllow : number;
+  overDraftLimit : boolean;
+  interestRateBefore7Days : number;
+  interestRateAfter7Days : number;
+  user : string ;
+  bank : string;
+}
+
+type AccountDetails = {
+  mainBalance : number;
+  loans : number;
+  interestRateBefore7Days : number;
+}
 const cardData: CardProps[] = [
   {
     label: "Total Income",
-    amount: "Ar 3 540 000",
+    amount: "",
     description: "+20.1% from last month",
     icon: CreditCard
   },
   {
     label: "Loans",
-    amount: "Ar 500 000",
+    amount: "",
     description: "amount borrowed from bank",
     icon: DollarSign
   },
@@ -24,7 +45,7 @@ const cardData: CardProps[] = [
   },
   {
     label: "Interest on loans",
-    amount: "13%",
+    amount: "",
     description: "amount of interest on bank loans",
     icon: Percent
   }
@@ -32,7 +53,21 @@ const cardData: CardProps[] = [
 
 
 export default function Home() {
+  const [accountData, setAccountData] = useState<AccountDetails>({} as AccountDetails);
 
+  useEffect(() => {
+    const fetchData =async () => {
+      const response = await fetch("http://locahost:8080/account");
+      const account : Account = await response.json();
+
+      setAccountData({
+        mainBalance : account.mainBalance,
+        loans : account.loans,
+        interestRateBefore7Days :account.interestRateBefore7Days * 100 ,
+      });
+    };
+    fetchData();
+  }, []);
   return (
     <div className="flex flex-col gap-5 w-full">
       <PageTitle title="Dashboard" />
@@ -40,7 +75,7 @@ export default function Home() {
         {cardData.map((d, i) => (
           <Card
             key={i}
-            amount={d.amount}
+            amount={accountData[d.label.toLowerCase()]?.toString() || d.amount}
             description={d.description}
             icon={d.icon}
             label={d.label}

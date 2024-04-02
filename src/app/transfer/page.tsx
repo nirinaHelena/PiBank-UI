@@ -42,19 +42,37 @@ interface User {
 interface Account {
   id : string ;
   accountNumber : string ;
+  mainBalance : number;
+  loans : number;
+  interestLoans : number;
+  creditAllow : number;
+  overDraftLimit : boolean;
+  interestBefore7 : number;
+  interstAfter7 : number;
   idUser : string;
+  bank : string;
 }
 
 interface Transfer {
   id : string;
+  reference : string;
+  transferReason : string;
   amount : number;
+  label : string;
+  effectiveDate : string;
+  registrationDate : string;
+  isCanceled : boolean;
   idAccount : string;
+  accountReceiver : string;
 }
 
 interface Transaction {
+  id : string;
   idTransfer : string;
-  date : string ;
+  idAccount : string;
+  category : string;
   type : string; //"INCOME" or "OUTCOME"
+  date : string ;
 }
 
 type TransferDetails = {
