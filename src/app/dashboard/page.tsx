@@ -1,8 +1,8 @@
 import PageTitle from "@/components/PageTitle";
 import { DollarSign, Percent, CreditCard,Wallet } from "lucide-react";
 import Card, { CardContent, CardProps } from "@/components/Card";
-import Charts from "@/components/Charts";
-
+import BarChart from "@/components/BarChart";
+import CircleChart from "@/components/CircleChart";
 const cardData: CardProps[] = [
   {
     label: "Total Income",
@@ -49,8 +49,12 @@ export default function Home() {
       </section>
       <section className="grid grid-cols-1 gap-4 transition-all lg:grid-cols-2">
         <CardContent>
-          <p className="p-4 font-semibold">Overview</p>
-          <Charts />
+          <p className="p-4 font-semibold">Overview Annually</p>
+          <BarChart />
+        </CardContent>
+        <CardContent>
+          <p className="p-4 font-semibold">Overview Monthly</p>
+          <CircleChart/>
         </CardContent>
       </section>
     </div>
