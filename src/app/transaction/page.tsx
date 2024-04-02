@@ -37,7 +37,7 @@ type Payment = {
   order: string;
   status: string;
   lastOrder: string;
-  method: string;
+  label: string;
 };
 
 const columns: ColumnDef<Payment>[] = [
@@ -67,8 +67,8 @@ const columns: ColumnDef<Payment>[] = [
     header: "Last Order"
   },
   {
-    accessorKey: "method",
-    header: "Method"
+    accessorKey: "label",
+    header: "label"
   }
 ];
 
@@ -76,92 +76,92 @@ const data: Payment[] = [
   {
     order: "ORD001",
     status: "Pending",
-    lastOrder: "2023-01-15",
-    method: "Credit Card"
+    lastOrder: "2023-01-31",
+    label: "Salary"
   },
   {
     order: "ORD002",
     status: "Processing",
-    lastOrder: "2023-02-20",
-    method: "PayPal"
+    lastOrder: "2023-09-29",
+    label: "Gifts"
   },
   {
     order: "ORD003",
     status: "Completed",
-    lastOrder: "2023-03-10",
-    method: "Stripe"
+    lastOrder: "2023-03-01",
+    label: "Party"
   },
   {
     order: "ORD004",
     status: "Pending",
     lastOrder: "2023-04-05",
-    method: "Venmo"
+    label: "Gasoil"
   },
   {
     order: "ORD005",
     status: "Completed",
     lastOrder: "2023-05-12",
-    method: "Bank Transfer"
+    label: "Bank Transfer"
   },
   {
     order: "ORD006",
-    status: "Processing",
-    lastOrder: "2023-06-18",
-    method: "Apple Pay"
+    status: "Completed",
+    lastOrder: "2023-06-29",
+    label: "Salary"
   },
   {
     order: "ORD007",
     status: "Completed",
     lastOrder: "2023-07-22",
-    method: "Google Pay"
+    label: "Video Games"
   },
   {
     order: "ORD008",
     status: "Pending",
     lastOrder: "2023-08-30",
-    method: "Cryptocurrency"
+    label: "Cryptocurrency"
   },
   {
     order: "ORD009",
     status: "Processing",
     lastOrder: "2023-09-05",
-    method: "Alipay"
+    label: "Gasoil"
   },
   {
     order: "ORD010",
     status: "Completed",
     lastOrder: "2023-10-18",
-    method: "WeChat Pay"
+    label: "Travel"
   },
   {
     order: "ORD011",
     status: "Pending",
     lastOrder: "2023-11-25",
-    method: "Square Cash"
+    label: "Internet"
   },
   {
     order: "ORD012",
     status: "Completed",
     lastOrder: "2023-12-08",
-    method: "Zelle"
+    label: "Restaurant"
   },
   {
     order: "ORD013",
     status: "Processing",
     lastOrder: "2024-01-15",
-    method: "Stripe"
+    label: "Facture"
   },
   {
     order: "ORD014",
     status: "Completed",
     lastOrder: "2024-02-20",
-    method: "PayPal"
+    label: "Pension"
   },
   {
     order: "ORD015",
     status: "Pending",
     lastOrder: "2024-03-30",
-    method: "Credit Card"
+    label: "Salary"
   }
 ];
 

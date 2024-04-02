@@ -9,7 +9,8 @@ import {
   LayoutDashboard,
   UsersRound,
   Settings,
-  ChevronRight
+  ChevronRight,
+  Bitcoin
 } from "lucide-react";
 import { Button } from "./ui/button";
 
@@ -58,6 +59,12 @@ export default function SideNavbar({}: Props) {
             title: "Transaction",
             href: "/transaction",
             icon: ShoppingCart,
+            variant: "ghost"
+          },
+          {
+            title: "Transfer",
+            href: "/transfer",
+            icon: Bitcoin,
             variant: "ghost"
           },
           {
