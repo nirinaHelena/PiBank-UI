@@ -26,9 +26,9 @@ import FormAccount from "@/components/Form"
 type Props = {};
 type UserDetails = {
   name: string;
-  amount: number;
-  lastOrder: string;
-  reason: string;
+  salary: number;
+  birthday: string;
+  accountNumber: string;
 };
 
 const columns: ColumnDef<UserDetails>[] = [
@@ -51,37 +51,37 @@ const columns: ColumnDef<UserDetails>[] = [
     }
   },
   {
-    accessorKey: "amount",
-    header: "Amount"
+    accessorKey: "accountNumber",
+    header: "Acount Number"
   },
   {
-    accessorKey: "lastOrder",
-    header: "Last Order"
+    accessorKey: "birthday",
+    header: "Birthday"
   },
   {
-    accessorKey: "reason",
-    header: "Reason"
+    accessorKey: "salary",
+    header: "Salary Monthly"
   }
 ];
 
 const data: UserDetails[] = [
   {
     name: "Dera Miaro",
-    amount: 5_000_000,
-    lastOrder: "2024-01-01",
-    reason: "AWS"
+    salary: 4_000_000,
+    birthday: "1984-10-01",
+    accountNumber: "**** **** **** 4521"
   },
   {
     name: "Nathanel Fanomezana",
-    amount: 1_200_000,
-    lastOrder: "2024-02-25",
-    reason: "Salary"
+    salary: 1_200_000,
+    birthday: "1995-02-25",
+    accountNumber: "**** **** **** 1278"
   },
   {
     name: "Nirina Helena",
-    amount: -400_000,
-    lastOrder: "2024-03-20",
-    reason: "Birthday of Mum"
+    salary: 400_000,
+    birthday: "2003-03-20",
+    accountNumber: "**** **** **** 5687"
   },
 ]
 
