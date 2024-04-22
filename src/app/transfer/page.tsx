@@ -13,7 +13,7 @@
 /** @format */
 "use client"
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { ColumnDef } from "@tanstack/react-table";
 import { DataTable } from "@/components/DataTable";
 import { Button } from "@/components/ui/button";
@@ -71,41 +71,47 @@ const columns: ColumnDef<TransferDetails>[] = [
     header: "Date"
   }
 ];
-const data: TransferDetails[] = [
-    {
-      name: "Olivia Martin",
-      account: "**** **** **** 1258",
-      saleAmount: "+2500000",
-      date: "2024-03-25"
-    },
-    {
-      name: "Jackson Lee",
-      account: "**** **** **** 5478",
-      saleAmount: "+600000",
-      date: "2024-03-24"
-    },
-    {
-      name: "Isabella Nguyen",
-      account: "**** **** **** 6512",
-      saleAmount: "-800000",
-      date: "2024-03-23"
-    },
-    {
-      name: "Isabella Nguyen",
-      account: "**** **** **** 9513",
-      saleAmount: "-150000",
-      date: "2024-03-22"
-    },
-    {
-      name: "Isabella Nguyen",
-      account: "**** **** **** 7514",
-      saleAmount: "+200000",
-      date: "2024-03-21"
-    },
-  ];
-
 
 function Transfer() {
+  const [transfers, setTransfers] = useState<TransferDetails[]>([]); 
+
+  useEffect(() => {
+    const fetchTransfers = async () => {
+      const userResponse = await fetch("http://localhost:8080/user");
+      const accountResponse = await fetch("http://localhost:8080/account");
+      const transferResponse = await fetch("http://localhost:8080/transfer");
+
+      const userData = await userResponse.json();
+      const accountData = await accountResponse.json();
+      const transferData = await transferResponse.json();
+
+      // Map user ID to user data for easy lookup
+      const userMap = new Map(userData.map(user => [user.id, `${user.firstName} ${user.lastName}`]));
+
+      // Map account ID to account number for easy lookup
+      const accountMap = new Map(accountData.map(account => [account.id, `**** **** **** ${account.accountNumber.slice(-4)}`]));
+
+      // Combine transfer, user, and account data
+      const combinedData = transferData.map(transfer => ({
+        name: userMap.get(transfer.accountSender) || "Unknown User",
+        account: accountMap.get(transfer.accountSender) || "Unknown Account",
+        saleAmount: transfer.amount,
+        date: new Date(transfer.effectiveDate).toISOString().split('T')[0]
+      }));
+
+      setTransfers(combinedData);
+    };
+
+    fetchTransfers();
+  }, []);
+
+  const columns: ColumnDef<TransferDetails>[] = [
+    { accessorKey: "name", header: "Name" },
+    { accessorKey: "account", header: "Account" },
+    { accessorKey: "saleAmount", header: "Sale Amount" },
+    { accessorKey: "date", header: "Date" }
+  ];
+
   return (
     <div>
      <div className="flex flex-row justify-between pb-5 gap-5 w-full items-center">
@@ -128,7 +134,7 @@ function Transfer() {
       </Dialog> 
     </div>
   <div>
-      <DataTable columns={columns} data={data} />
+      <DataTable columns={columns} data={transfers} />
         </div>
       </div>
   );

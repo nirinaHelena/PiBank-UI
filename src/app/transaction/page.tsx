@@ -33,17 +33,32 @@ import TransactionForm from "@/components/TransactionForm";
 
 
 type Props = {};
-type Payment = {
-  order: string;
-  status: string;
-  lastOrder: string;
-  label: string;
-};
 
-const columns: ColumnDef<Payment>[] = [
+
+interface Transaction {
+  id: string;
+  category: string;
+  type: string;
+  date: string;
+}
+
+interface Transfer {
+  id: string;
+  reference: string;
+  transferReason: string;
+  amount: number;
+  label: string;
+  effectiveDate: string;
+  registrationDate: string;
+  accountSender: string;
+  accountReceiver: string;
+}
+
+
+const columns: ColumnDef<Transaction>[] = [
   {
-    accessorKey: "order",
-    header: "Order"
+    accessorKey: "id",
+    header: "Order",
   },
   {
     accessorKey: "status",
@@ -72,123 +87,74 @@ const columns: ColumnDef<Payment>[] = [
   }
 ];
 
-const data: Payment[] = [
-  {
-    order: "ORD001",
-    status: "Pending",
-    lastOrder: "2023-01-31",
-    label: "Salary"
-  },
-  {
-    order: "ORD002",
-    status: "Processing",
-    lastOrder: "2023-09-29",
-    label: "Gifts"
-  },
-  {
-    order: "ORD003",
-    status: "Completed",
-    lastOrder: "2023-03-01",
-    label: "Party"
-  },
-  {
-    order: "ORD004",
-    status: "Pending",
-    lastOrder: "2023-04-05",
-    label: "Gasoil"
-  },
-  {
-    order: "ORD005",
-    status: "Completed",
-    lastOrder: "2023-05-12",
-    label: "Bank Transfer"
-  },
-  {
-    order: "ORD006",
-    status: "Completed",
-    lastOrder: "2023-06-29",
-    label: "Salary"
-  },
-  {
-    order: "ORD007",
-    status: "Completed",
-    lastOrder: "2023-07-22",
-    label: "Video Games"
-  },
-  {
-    order: "ORD008",
-    status: "Pending",
-    lastOrder: "2023-08-30",
-    label: "Cryptocurrency"
-  },
-  {
-    order: "ORD009",
-    status: "Processing",
-    lastOrder: "2023-09-05",
-    label: "Gasoil"
-  },
-  {
-    order: "ORD010",
-    status: "Completed",
-    lastOrder: "2023-10-18",
-    label: "Travel"
-  },
-  {
-    order: "ORD011",
-    status: "Pending",
-    lastOrder: "2023-11-25",
-    label: "Internet"
-  },
-  {
-    order: "ORD012",
-    status: "Completed",
-    lastOrder: "2023-12-08",
-    label: "Restaurant"
-  },
-  {
-    order: "ORD013",
-    status: "Processing",
-    lastOrder: "2024-01-15",
-    label: "Facture"
-  },
-  {
-    order: "ORD014",
-    status: "Completed",
-    lastOrder: "2024-02-20",
-    label: "Pension"
-  },
-  {
-    order: "ORD015",
-    status: "Pending",
-    lastOrder: "2024-03-30",
-    label: "Salary"
-  }
-];
 
 export default function Transaction({}: Props) {
+  const [transactions, setTransactions] = React.useState<Transaction[]>([]);
+  const [transfers, setTransfers] = React.useState<Transfer[]>([]);
+
+  React.useEffect(() => {
+    // Fetch transaction data
+    fetch('http://localhost:8080/transaction')
+      .then((response) => response.json())
+      .then((data) => {
+        const updatedTransactions = data.map((item: any) => ({
+          id: item.id,
+          category: item.category,
+          type: item.type,
+          date: item.date,
+        }));
+        setTransactions(updatedTransactions);
+      })
+      .catch((error) => console.error('Error fetching transactions:', error));
+
+    // Fetch transfer data
+    fetch('http://localhost:8080/transfer')
+      .then((response) => response.json())
+      .then((data) => {
+        const updatedTransfers = data.map((item: any) => ({
+          id: item.id,
+          reference: item.reference,
+          transferReason: item.transferReason,
+          amount: item.amount,
+          label: item.label,
+          effectiveDate: item.effectiveDate,
+          registrationDate: item.registrationDate,
+          accountSender: item.accountSender,
+          accountReceiver: item.accountReceiver,
+        }));
+        setTransfers(updatedTransfers);
+      })
+      .catch((error) => console.error('Error fetching transfers:', error));
+  }, []);
+
+  const transformData = (transfers: Transfer[]): Transaction[] => {
+    return transfers.map((transfer) => {
+      const currentDate = new Date().toISOString().split('T')[0];
+      const lastOrder =
+        currentDate >= transfer.registrationDate ? transfer.registrationDate : transfer.effectiveDate;
+      const status = currentDate >= transfer.registrationDate ? 'Completed' : 'Processing';
+
+      return {
+        id: transfer.id,
+        category: transfer.label,
+        type: 'CREDIT',
+        date: lastOrder,
+        status: status,
+      };
+    });
+  };
+
+
+  const mergedData = [...transactions, ...transformData(transfers)];
+  
   return (
     <div>
       <div className="flex flex-row justify-between pb-5 gap-5 w-full items-center">
       <PageTitle title="Transactions" />
-      <Dialog>
-        <DialogTrigger asChild>
-        <Button variant="outline" className="font-semibold  rounded-sm">Make a Transaction</Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[400px]">
-          <DialogHeader>
-            <DialogTitle> Make a Transaction</DialogTitle>
-            <DialogDescription>
-              Make a Transaction. Follow it on the table
-            </DialogDescription>
-          </DialogHeader>
-
-          <TransactionForm/>
-
-        </DialogContent>
-      </Dialog>
+      
       </div>
       <div>
-      <DataTable columns={columns} data={data} />
+      <DataTable columns={columns} data={mergedData} />
       </div>
       </div>
   );

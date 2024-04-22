@@ -31,13 +31,59 @@ function FormAccount() {
       firstname: "",
       birthday: undefined,
       salary: undefined,
-      accountNumber: generateAccountNumber,
+      accountNumber: generateAccountNumber(),
     },
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     data.accountNumber= generateAccountNumber();
     console.log(data);
+    // create user
+    const userResponse = await fetch('http:localhost:8080/user', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: data.accountNumber,
+        firstName: data.firstname,
+        lastName: data.name,
+        birthdayDate: data.birthday,
+        netMonthSalary: data.salary,
+      }),
+    });
+    if (!userResponse.ok) {
+      console.error('Failed to create user');
+      return;
+    }
+
+    const userData = await userResponse.json();
+    // create account
+    const accountResponse = await fetch('http://localhost:8080/account', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: userData.id,
+        accountNumber: data.accountNumber,
+        mainBalance: 0,
+        loans: 0,
+        interstLoans : 0,
+        creditAllow: 0,
+        overDraftLimit : false,
+        interestRateBefore7Days: 0,
+        interestRateAfter7Days: 0,
+        user: userData.id,
+        bank: 1,
+      }),
+    });
+
+    if (!accountResponse.ok) {
+      console.error('Failed to create account');
+      return;
+    }
+    console.log('User and account created successfully');
   };
 
   return (
